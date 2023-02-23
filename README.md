@@ -13,6 +13,7 @@ DSPI is a Singely-Handled and Managed Custom Datbaase Creator, Manager, and Libr
 ## ✨ Installation
 
 🤝**Never used DSPI before? Currently, we got no form of showing how to setup this up, so [Request Assistance!](https://forms.gle/Rgn2nhP5N4z8DqzV9)***
+
 📃[Check out our new documentation!](https://zyko.gitbook.io/dspi-or-creator-documentation/)
 
 **The video is coming soon, until then use the assistance form.**
