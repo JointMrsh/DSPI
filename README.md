@@ -26,6 +26,12 @@ DSPI is a Singely-Handled and Managed Custom Datbaase Creator, Manager, and Libr
 
 **Our documentation is not just yet setup. Wait for that! [Request Assistance!](https://forms.gle/Rgn2nhP5N4z8DqzV9) for help from the creator!**
 
+**Ensure you do:
+local DSPI = require(game:GetService("ServerScriptService"):WaitForChild("DSPI_Framework"))
+
+DSPI.Create(Enter your database name)
+**
+
 ## 🪙 Premium Features
 
 Premium users get access to features that are not yet released to the public. (Donation Link and Features coming shortly.)
