@@ -13,6 +13,9 @@ DSPI is a Singely-Handled and Managed Custom Datbaase Creator, Manager, and Libr
 ## ✨ Installation
 
 🤝**Never used DSPI before? Currently, we got no form of showing how to setup this up, so [Request Assistance!](https://forms.gle/Rgn2nhP5N4z8DqzV9)***
+📃[Check out our new documentation!](https://zyko.gitbook.io/dspi-or-creator-documentation/)
+
+**The video is coming soon, until then use the assistance form.**
 
 ### How to install (Model)
 1. [Take a copy](https://www.roblox.com/library/12580680880/DSPI-V1) of the DSPI model from the Roblox Library.
