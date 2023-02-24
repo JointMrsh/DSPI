@@ -9,7 +9,7 @@
 ---
 
 DSPI is a Singely-Handled and Managed Custom Datbaase Creator, Manager, and Library for the ROBLOX Database to allow for easier database creation and management.
-[Join our Discord Server!](discord.gg/dspi)
+[Join our Discord Server!](https://discord.gg/dspi)
 
 ## ✨ Installation
 
