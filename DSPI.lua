@@ -1,35 +1,85 @@
-local DSPI = {}
+local Database = {}
+
 local DataStoreService = game:GetService("DataStoreService")
-local DataStore = DataStoreService:GetDataStore("UserDataStore")
+local Players = game:GetService("Players")
 
-local function create_table(Player)
-	local player_stats = {}
-	for _, stat in pairs(Player.leaderstats:GetChildren()) do
-		player_stats[stat.Name] = stat.Value
-	end
-	return player_stats
+local DATABASE_NAME = "UserData"
 
+local function getPlayerStats(player)
+    local stats = {}
+    for _, stat in pairs(player.leaderstats:GetChildren()) do
+        stats[stat.Name] = stat.Value
+    end
+    return stats
 end
 
-
-
-DSPI.SetAsync = function(Player, UserId) 
-	local Player_Stats = create_table(Player)
-	
-	local success, err = pcall(function()
-		DataStore:SetAsync(UserId, Player_Stats)
-	end)
-	
-	if success then
-		print("Successfully Asynced stats to "..UserId.."!")
-	else
-		print("Unable to Async stats for "..UserId..".")
-	end
+function Database:save(player)
+    local success, result = pcall(function()
+        local dataStore = DataStoreService:GetDataStore(DATABASE_NAME)
+        local key = "Player_" .. player.UserId
+        local stats = getPlayerStats(player)
+        dataStore:SetAsync(key, stats)
+    end)
+    if success then
+        print("Successfully saved data for player " .. player.Name)
+    else
+        print("Error saving data for player " .. player.Name .. ": " .. result)
+    end
 end
 
-DSPI.GetAsync = function(UserId)
-	local data = DataStore:GetAsync(UserId)
-	return data
+function Database:load(player)
+    local success, result = pcall(function()
+        local dataStore = DataStoreService:GetDataStore(DATABASE_NAME)
+        local key = "Player_" .. player.UserId
+        local stats = dataStore:GetAsync(key)
+        if stats then
+            for statName, statValue in pairs(stats) do
+                if player.leaderstats:FindFirstChild(statName) then
+                    player.leaderstats[statName].Value = statValue
+                end
+            end
+        end
+    end)
+    if success then
+        print("Successfully loaded data for player " .. player.Name)
+    else
+        print("Error loading data for player " .. player.Name .. ": " .. result)
+    end
 end
 
-return DSPI
+function Database:loadAllPlayers()
+    local success, result = pcall(function()
+        local dataStore = DataStoreService:GetDataStore(DATABASE_NAME)
+        for _, player in pairs(Players:GetPlayers()) do
+            local key = "Player_" .. player.UserId
+            local stats = dataStore:GetAsync(key)
+            if stats then
+                for statName, statValue in pairs(stats) do
+                    if player.leaderstats:FindFirstChild(statName) then
+                        player.leaderstats[statName].Value = statValue
+                    end
+                end
+            end
+        end
+    end)
+    if success then
+        print("Successfully loaded data for all players")
+    else
+        print("Error loading data for all players: " .. result)
+    end
+end
+
+function Database:clear(player)
+    local success, result = pcall(function()
+        local dataStore = DataStoreService:GetDataStore(DATABASE_NAME)
+        local key = "Player_" .. player.UserId
+        dataStore:RemoveAsync(key)
+    end)
+    if success then
+        print("Successfully cleared data for player " .. player.Name)
+    else
+        print("Error clearing data for player " .. player.Name .. ": " .. result)
+    end
+end
+
+return Database
